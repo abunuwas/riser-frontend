@@ -2,7 +2,7 @@ import * as actions from './actions'
 import mutations from './mutations'
 
 const state = {
-  placement: {}
+  placements: {}
 }
 
 export default {
