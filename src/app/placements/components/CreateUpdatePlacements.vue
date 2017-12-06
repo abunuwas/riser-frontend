@@ -6,7 +6,7 @@
       View all of your placements!
     </router-link>
 
-    <form class="form" @submit.prevent="createNewPlacement">
+    <form class="form" @submit.prevent="processSave">
       <label for="submitted">Submitted</label>
       <p class="control">
         <input
@@ -53,29 +53,47 @@
         </select>
       </p>
       <label for="start">Start</label>
-      <p class="control">
+      <p class="control has-icon has-addons">
         <datepicker
           name="start"
           input-class="input"
           format="dd MMMM yyyy"
           v-model="selectedPlacement.start"
         ></datepicker>
+        <span class="icon">
+          <i class="fa fa-calendar"
+             aria-hidden="true"></i>
+        </span>
       </p>
       <label for="end">End</label>
-      <p class="control">
+      <p class="control has-icon has-addons">
         <datepicker
           name="end"
           input-class="input"
           format="dd MMMM yyyy"
           v-model="selectedPlacement.end"
         ></datepicker>
+        <span class="icon">
+          <i class="fa fa-calendar"
+             aria-hidden="true"></i>
+        </span>
       </p>
+      <div class="control is-grouped">
+        <p class="control">
+          <button class="button is-primary">Submit</button>
+        </p>
+        <p class="control">
+          <router-link :to="{ name: 'listPlacements' }">
+            <button class="button is-link">Cancel</button>
+          </router-link>
+        </p>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import Datepicker from 'vuejs-datepicker'
 
   const STATUSES = {
@@ -108,20 +126,58 @@
         statuses: STATUSES,
         companies: COMPANIES,
         candidates: CANDIDATES,
-        selectedPlacement: {}
+        selectedPlacement: {},
+        editing: false
+      }
+    },
+
+    mounted () {
+      if ('budgetId' in this.$route.params) {
+        this.loadBudgets().then(() => {
+          let selectedPlacement = this.getPlacementById(this.$route.params.placementId)
+          if (selectedPlacement) {
+            this.editing = true
+            this.selectedPlacement = Object.assign({}, selectedPlacement)
+          }
+        })
       }
     },
 
     methods: {
       ...mapActions([
-        'createPlacement'
+        'createPlacement',
+        'updatePlacement',
+        'loadPlacements'
       ]),
 
-      createNewPlacement () {
+      resetAndGo () {
+        this.selectedPlacement = {}
+      },
+
+      saveNewPlacement () {
         this.createPlacement(this.selectedPlacement).then(() => {
-          this.selectedPlacement = {}
+          this.resetAndGo()
+        }).catch((err) => {
+          alert(err)
         })
+      },
+
+      savePlacement () {
+        this.updatePlacement(this.selectedPlacement).then(() => {
+          this.resetAndGo()
+        })
+      },
+
+      processSave () {
+        this.$route.params.placementId ? this.savePlacement() : this.saveNewPlacement()
       }
+    },
+
+    computed: {
+      ...mapGetters([
+        'getPlacementById',
+        'getCategoryById'
+      ])
     }
   }
 </script>
