@@ -9,6 +9,6 @@ export default [
   {
     path: '/placements/create',
     component: components.CreateUpdatePlacements,
-    name: 'createUpdatePlacements'
+    name: 'createUpdatePlacement'
   }
 ]
