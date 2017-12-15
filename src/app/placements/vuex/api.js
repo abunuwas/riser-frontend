@@ -14,16 +14,16 @@ export const savePlacement = (placement) => {
 }
 
 export const fetchPlacements = (user, token) => {
-  return axios.get('/api/placements', { user, token }).then((res) => {
-    let placements = {}
-    Object.keys(res).forEach((o) => {
-      placements[o].start = new Date(placements[o].start)
-      placements[o].end = new Date(placements[o].end)
+  return axios.get('http://localhost:7000/api/placements', { user, token })
+    .then((res) => {
+      console.log('fetching placements...')
+      console.log(res)
+      console.log(res.data)
+      console.log(res.data.placements[0])
+      return res.data.placements
     })
-    return placements
-  })
 }
 
-export const deletePlacement = (user, token) => {
+export const removePlacement = (user, token) => {
   console.log('haha')
 }
