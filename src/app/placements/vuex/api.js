@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 
 export const savePlacement = (placement) => {
   placement = Object.assign({}, placement)
@@ -16,11 +17,15 @@ export const savePlacement = (placement) => {
 export const fetchPlacements = (user, token) => {
   return axios.get('http://localhost:7000/api/placements', { user, token })
     .then((res) => {
+      let placements = res.data.placements
+      Object.keys(placements).forEach((o) => {
+        placements[o].start = new Date(moment(placements[o].start).format('YYYY-MM-DD'))
+        placements[o].end = new Date(moment(placements[o].end).format('YYYY-MM-DD'))
+      })
       console.log('fetching placements...')
-      console.log(res)
-      console.log(res.data)
-      console.log(res.data.placements[0])
-      return res.data.placements
+      console.log(placements)
+      console.log(placements[0])
+      return placements
     })
 }
 
