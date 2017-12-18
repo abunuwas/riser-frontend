@@ -13,7 +13,8 @@ export default {
     state.placements = payload
   },
 
-  DELETE_PLACEMENT (state, payload) {
-    Vue.delete(state.placements, payload.placement.id)
+  DELETE_PLACEMENT (state, placement) {
+    let index = state.placements.indexOf(placement)
+    Vue.delete(state.placements, index)
   }
 }

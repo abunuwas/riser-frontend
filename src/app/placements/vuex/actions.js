@@ -22,6 +22,6 @@ export const loadPlacements = (state) => {
 }
 
 export const deletePlacement = ({ commit }, data) => {
-  commit('DELETE_PLACEMENT', { placement: data })
+  commit('DELETE_PLACEMENT', data)
   removePlacement(data)
 }
