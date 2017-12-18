@@ -1,8 +1,10 @@
 import Vue from 'vue'
 
 export default {
-  CREATE_PLACEMENT (state, payload) {
-    state.placements[payload.placement.id] = payload.placement
+  CREATE_PLACEMENT (state, placement) {
+    console.log('CREATE_PLACEMENT')
+    console.log(placement)
+    state.placements[placement.id] = placement
   },
 
   UPDATE_PLACEMENT (state, payload) {

@@ -188,6 +188,7 @@
 
       processSave () {
         this.$route.params.placementId ? this.savePlacement() : this.saveNewPlacement()
+        this.$router.push('/placements')
       }
     },
 
