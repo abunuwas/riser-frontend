@@ -17,9 +17,11 @@
           </div>
         </div>
       </nav>
+      <pre>{{ placements }}</pre>
       <table class="table is-bordered">
         <thead>
         <tr>
+          <th>Submitted</th>
           <th>Status</th>
           <th>Candidate</th>
           <th>Company</th>
@@ -30,10 +32,8 @@
         <tbody>
         <tr v-for="placement, key in placements">
           <td class="subtitle is-5">
-            <span class="tag is-5">{{ placement.status }}</span>
+            <span class="tag is-5">{{ placement.submitted }}</span>
           </td>
-        </tr>
-        <tr v-for="placement, key in placements">
           <td class="subtitle is-5">
             <span class="tag is-5">{{ placement.status }}</span>
           </td>
@@ -98,6 +98,7 @@
       confirmDeletePlacement (placement) {
         if (confirm(`Are you sure you want to delete candidacy of ${placement.candidate} for ${placement.company}`)) {
           this.deletePlacement(placement)
+          // this.$forceUpdate()
         }
       }
     },

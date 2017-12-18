@@ -1,94 +1,112 @@
 <template>
-  <div id="placements-create-edit-view">
-    You can create and edit placements with me, yippeeee!
+  <div class="columns">
+    <div class="column is-2"></div>
+      <div id="placements-create-edit-view">
+        <nav class="level">
+          <div class="level-left">
+            <h1 class="title is-2">Add a new placement</h1>
+          </div>
+          <div class="level-right">
+            <div class="level-item">
+              <div class="level-item has-text-centered">
+                <router-link
+                  class="button is-primary"
+                  :to="{ name: 'listPlacements' }"
+                >
+                  View all of your placements!
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </nav>
 
-    <router-link :to="{ name: 'listPlacements' }">
-      View all of your placements!
-    </router-link>
-
-    <form class="form" @submit.prevent="processSave">
-      <label for="submitted">Submitted</label>
-      <p class="control">
-        <input
-          type="text"
-          class="input"
-          name="submitted"
-          v-model="selectedPlacement.name"
-        >
-      </p>
-      <label for="status">Status</label>
-      <p class="control">
-        <select
-          name="status"
-          v-model="selectedPlacement.status"
-        >
-          <option
-            v-for="value, key in statuses"
-            :value="key"
-          >{{ value }}</option>
-        </select>
-      </p>
-      <label for="company">Company</label>
-      <p class="control">
-        <select
-          name="company"
-          v-model="selectedPlacement.company"
-        >
-          <option
-            v-for="value, key in companies"
-            :value="key"
-          >{{ value }}</option>
-        </select>
-      </p>
-      <label for="candidate">Candidate</label>
-      <p class="control">
-        <select
-          name="candidate"
-          v-model="selectedPlacement.candidate"
-        >
-          <option
-            v-for="value, key in candidates"
-            :value="key"
-          >{{ value }}</option>
-        </select>
-      </p>
-      <label for="start">Start</label>
-      <p class="control has-icon has-addons">
-        <datepicker
-          name="start"
-          input-class="input"
-          format="dd MMMM yyyy"
-          v-model="selectedPlacement.start"
-        ></datepicker>
-        <span class="icon">
-          <i class="fa fa-calendar"
-             aria-hidden="true"></i>
-        </span>
-      </p>
-      <label for="end">End</label>
-      <p class="control has-icon has-addons">
-        <datepicker
-          name="end"
-          input-class="input"
-          format="dd MMMM yyyy"
-          v-model="selectedPlacement.end"
-        ></datepicker>
-        <span class="icon">
-          <i class="fa fa-calendar"
-             aria-hidden="true"></i>
-        </span>
-      </p>
-      <div class="control is-grouped">
-        <p class="control">
-          <button class="button is-primary">Submit</button>
-        </p>
-        <p class="control">
-          <router-link :to="{ name: 'listPlacements' }">
-            <button class="button is-link">Cancel</button>
-          </router-link>
-        </p>
+        <div class="columns">
+          <div class="column is-6">
+            <form
+              class="form"
+              @submit.prevent="processSave"
+            >
+              <label for="submitted">Submitted</label>
+              <p class="control">
+                <input
+                  type="text"
+                  class="input"
+                  name="submitted"
+                  v-model="selectedPlacement.submitted"
+                >
+              </p>
+              <label for="status">Status</label>
+              <p class="control">
+                <select
+                  type="text"
+                  name="status"
+                  v-model="selectedPlacement.status"
+                >
+                <option
+                  v-for="value, key in statuses"
+                  :value="value"
+                >{{ value }}</option>
+                </select>
+              </p>
+              <label for="candidate">Candidate</label>
+              <p class="control">
+                <input
+                  type="text"
+                  class="input"
+                  name="candidate"
+                  v-model="selectedPlacement.candidate"
+                >
+              </p>
+              <label for="company">Company</label>
+              <p class="control">
+                <input
+                  type="text"
+                  class="input"
+                  name="company"
+                  v-model="selectedPlacement.company"
+                >
+              </p>
+              <label for="start" class="date">Start</label>
+              <p class="control">
+                <datepicker
+                  name="start"
+                  input-class="input"
+                  format="dd MMMM yyyy"
+                  v-model="selectedPlacement.start"
+                ></datepicker>
+                <span class="icon">
+                  <i class="fa fa-calendar"
+                     aria-hidden="true"
+                  ></i>
+                </span>
+              </p>
+              <label for="start" class="date">End</label>
+              <p class="control">
+                <datepicker
+                  name="end"
+                  input-class="input"
+                  format="dd MMMM yyyy"
+                  v-model="selectedPlacement.end"
+                ></datepicker>
+                <span class="icon">
+                  <i class="fa fa-calendar"
+                     aria-hidden="true"
+                  ></i>
+                </span>
+              </p>
+              <p class="control">
+                <button class="button is-primary">Submit</button>
+              </p>
+              <p class="control">
+                <router-link :to="{ name: 'listPlacements' }">
+                  <button class="button is-link">Cancel</button>
+                </router-link>
+              </p>
+            </form>
+          </div>
+        </div>
       </div>
-    </form>
+    <div class="column is-2"></div>
   </div>
 </template>
 
