@@ -1,3 +1,4 @@
 import { routes as placements } from './placements'
+import { routes as timesheets } from './timesheets'
 
-export default [ ...placements ]
+export default [ ...timesheets, ...placements ]
