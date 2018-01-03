@@ -8,12 +8,15 @@
           </div>
         </nav>
         <!--<pre>{{ timesheets }}</pre>-->
-        <div class="container">
-          <div class="item"
+        <div class="tile is-ancestor">
+          <div class="tile is-parent"
                v-for="timesheet, key in timesheets">
-            <div v-bind:style="{ 'background-color': getColor(timesheet.status) }">{{ timesheet.status }}</div>
-            <div>{{ timesheet.start }}-{{ timesheet.end }}</div>
-            <div>{{ timesheet.working_days }} days worked</div>
+          <article class="tile is-child box">
+            <p class="subtitle" v-bind:style="{ 'background-color': getColor(timesheet.status) }">
+              {{ timesheet.status }}</p>
+            <div class="content">{{ timesheet.start }}-{{ timesheet.end }}</div>
+            <div class="content">{{ timesheet.working_days }} days worked</div>
+          </article>
           </div>
         </div>
       </div>
@@ -115,18 +118,4 @@
 </script>
 
 <style>
-  .container {
-    width: 100%;
-    height: 100%;
-    border: black .1px solid;
-    border-bottom: black .1px solid;
-    border-right: black .1px solid;
-  }
-
-  .item {
-    float: left;
-    width: 30%;
-    height: 28%;
-    border: red .2px solid;
-  }
 </style>
