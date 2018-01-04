@@ -16,11 +16,15 @@
                    v-for="timesheet, key in timesheets"
               >
                 <article class="tile is-child box">
+                  <router-link
+                    :to="{ name: 'createUpdateTimesheet', params: timesheet.id }"
+                  >
                   <p class="subtitle"
                      v-bind:style="{ 'background-color': getColor(timesheet.status) }">
                     {{ timesheet.status }}</p>
                   <div class="content">{{ timesheet.start }}-{{ timesheet.end }}</div>
                   <div class="content">{{ timesheet.working_days }} days worked</div>
+                  </router-link>
                 </article>
               </div>
             </div>

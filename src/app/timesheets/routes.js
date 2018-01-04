@@ -7,7 +7,7 @@ export default [
     name: 'listTimesheets'
   },
   {
-    path: '/timesheets/create',
+    path: '/timesheets/update',
     component: components.CreateUpdateTimesheets,
     name: 'createUpdateTimesheet'
   }
