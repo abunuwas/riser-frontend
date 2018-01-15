@@ -1,13 +1,13 @@
 <template>
   <div class="columns">
     <div class="column is-2"></div>
-      <div id="timesheets-ist-view">
+      <div id="timesheets-list-view">
         <nav class="level">
           <div class="level-left">
             <h2 class="title is-2">Timesheets</h2>
           </div>
         </nav>
-        <!--<pre>{{ timesheets }}</pre>-->
+        <pre>{{ timesheets }}</pre>
           <div class="row"
           >
             <div class="a-column">
@@ -45,70 +45,17 @@
       Datepicker
     },
 
-    data: () => {
-      return {
-        timesheets: {
-          '1': {
-            start: '2017-01-03',
-            end: '2017-02-04',
-            status: 'approved',
-            working_days: 10
-          },
-          '2': {
-            start: '2017-01-03',
-            end: '2017-02-04',
-            status: 'approved',
-            working_days: 10
-          },
-          '3': {
-            start: '2017-01-03',
-            end: '2017-02-04',
-            status: 'approved',
-            working_days: 10
-          },
-          '4': {
-            start: '2017-01-03',
-            end: '2017-02-04',
-            status: 'approved',
-            working_days: 10
-          },
-          '5': {
-            start: '2017-01-03',
-            end: '2017-02-04',
-            status: 'approved',
-            working_days: 10
-          },
-          '6': {
-            start: '2017-01-03',
-            end: '2017-02-04',
-            status: 'approved',
-            working_days: 10
-          },
-          '7': {
-            start: '2017-01-03',
-            end: '2017-02-04',
-            status: 'approved',
-            working_days: 10
-          },
-          '8': {
-            start: '2017-04-03',
-            end: '2017-05-04',
-            status: 'undefined',
-            working_days: 0
-          }
-        }
-      }
-    },
-
     filters: {
       moment
     },
 
     mounted () {
+      this.loadTimesheets()
     },
 
     methods: {
       ...mapActions([
+        'loadTimesheets'
       ]),
 
       getColor (status) {
@@ -122,6 +69,7 @@
 
     computed: {
       ...mapState({
+        'timesheets': state => state.timesheets
       })
     }
   }

@@ -18,7 +18,8 @@ export const updateTimesheet = ({ commit, state }, data) => {
   commit('UPDATE_TIMESHEET', { data })
 }
 
-export const loadTimesheet = (state) => {
+export const loadTimesheets = (state) => {
+  console.log('Trying to load timesheets....')
   if (!state.timesheets || Object.keys(state.timesheets).length === 0) {
     return fetchTimesheets().then((res) => {
       state.commit('LOAD_TIMESHEETS', res)
