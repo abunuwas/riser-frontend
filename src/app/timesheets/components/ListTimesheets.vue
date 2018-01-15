@@ -1,15 +1,14 @@
 <template>
   <div class="columns">
-    <div class="column is-2"></div>
+    <div class="column is-2 is-mobile"></div>
+    <div class="column is- is-mobile">
       <div id="timesheets-list-view">
         <nav class="level">
           <div class="level-left">
             <h2 class="title is-2">Timesheets</h2>
           </div>
         </nav>
-        <pre>{{ timesheets }}</pre>
-          <div class="row"
-          >
+        <!--<pre>{{ timesheets }}</pre>-->
             <div class="a-column">
               <div class="tile is-parent is-4"
                    style="float: left;"
@@ -22,14 +21,15 @@
                   <p class="subtitle"
                      v-bind:style="{ 'background-color': getColor(timesheet.status) }">
                     {{ timesheet.status }}</p>
-                  <div class="content">{{ timesheet.start }}-{{ timesheet.end }}</div>
-                  <div class="content">{{ timesheet.working_days }} days worked</div>
+                  <div class="content">{{ timesheet.ts_start }}-{{ timesheet.ts_end }}</div>
+                  <div class="content">{{ timesheet["working days"].length }} days worked</div>
                   </router-link>
                 </article>
               </div>
             </div>
-          </div>
       </div>
+    </div>
+    <div class="column is-2 is-mobile"></div>
   </div>
 </template>
 
@@ -69,7 +69,7 @@
 
     computed: {
       ...mapState({
-        'timesheets': state => state.timesheets
+        'timesheets': state => state.timesheets.timesheets
       })
     }
   }
