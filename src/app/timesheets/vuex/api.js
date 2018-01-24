@@ -3,15 +3,18 @@ import moment from 'moment'
 
 export const saveTimesheet = (timesheet) => {
   timesheet = Object.assign({}, timesheet)
-  console.log(timesheet)
+  console.log('THE TIMESHEET ---' + timesheet)
   timesheet.start = timesheet.start.toJSON()
   timesheet.end = timesheet.end.toJSON()
-
-  return axios.post('http://localhost:7000/api/timesheets', { timesheet: timesheet })
+  console.log('TIMESHEET start: ' + timesheet.start)
+  let idURL = timesheet.id.split('-')[1]
+  let url = `http://82.223.35.243/2/2/${idURL}/riserts.fcgi`
+  return axios.post(url, { 'timesheet': timesheet })
     .then((res) => {
+      console.log('RESPONSE FROM SERVER: ' + res)
       return res.data
     }).catch((res) => {
-      console.log('ERROR: ' + res.data)
+      console.log('ERROR: ' + res)
     })
 }
 

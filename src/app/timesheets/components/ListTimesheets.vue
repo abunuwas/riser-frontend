@@ -16,7 +16,8 @@
               >
                 <article class="tile is-child box">
                   <router-link
-                    :to="{ name: 'createUpdateTimesheet', params: timesheet.id }"
+                    :to="{ name: 'updateTimesheet',
+                       params: { timesheetId: key } }"
                   >
                   <p class="subtitle"
                      v-bind:style="{ 'background-color': getColor(timesheet.status) }">

@@ -16,53 +16,80 @@
         </div>
       </nav>
 
+      <!--<pre>{{ selectedTimesheet }}</pre>-->
+
       <div class="columns">
         <div class="column is-6">
+          <p class="control">
+              Status: {{ selectedTimesheet.status }}
+          </p>
+          <p class="control">
+            Start: {{ selectedTimesheet.ts_start }}
+          </p>
+          <p class="control">
+            End: {{ selectedTimesheet.ts_end }}
+          </p>
+          <p class="control">
+            {{ selectedTimesheet.break }}
+          </p>
+          <p class="control">Working days:</p>
           <form
             class="form"
             @submit.prevent="processSave"
           >
-            <label for="State">State</label>
-            <p class="control">
-                <input
-                  type="text"
-                  class="input has-text-centered"
-                  name="submitted"
-                  value="selectedTimesheet.state"
-                  v-model="selectedTimesheet.state"
-                readonly>
+            <table class="table is-bordered">
+              <thead>
+              <th>Date</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Break</th>
+              <th>Status</th>
+              </thead>
+              <tbody v-for="day in selectedTimesheet['working days']">
+              <tr>
+                <td>
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis">{{ day.date }}</div>
+                </td>
+                <td>
+                  <input type="text"
+                         class="input"
+                         name="start"
+                         v-model="day.start"
+                         style="width:auto;"
+                  >
+                </td>
+                <td>
+                  <input type="text"
+                         class="input"
+                         name="end"
+                         v-model="day.end"
+                         style="width:auto;"
+                  >
+                </td>
+                <td>
+                  <input type="text"
+                         class="input"
+                         name="end"
+                         v-model="day.break"
+                         style="width:auto;"
+                  >
+                </td>
+                <td>
+                  <div class="non-wrappers">{{ day.state }}</div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="control is-grouped">
+              <p class="control">
+                <button class="button is-success">Submit</button>
               </p>
-            <label for="Date">Date</label>
-            <p class="control">
-                {{ selectedTimesheet.date }}12
+              <p class="control">
+                <router-link :to="{ name: 'listTimesheets' }">
+                  <button class="button is-linked">Cancel</button>
+                </router-link>
               </p>
-            <label for="break">Break</label>
-            <p class="control">
-              <input
-                type="text"
-                class="input"
-                name="submitted"
-                v-model="selectedTimesheet.break"
-              >
-            </p>
-            <label for="break">Break</label>
-            <p class="control">
-              <input
-                type="text"
-                class="input"
-                name="submitted"
-                v-model="selectedTimesheet.break"
-              >
-            </p>
-            <label for="break">Break</label>
-            <p class="control">
-              <input
-                type="text"
-                class="input"
-                name="submitted"
-                v-model="selectedTimesheet.break"
-              >
-            </p>
+              </div>
           </form>
         </div>
       </div>
@@ -84,19 +111,33 @@
 
     data: () => {
       return {
-        selectedTimesheet: {
-          'state': 'pending'
-        }
+        selectedTimesheet: {},
+        editing: false
+      }
+    },
+
+    mounted () {
+      if ('timesheetId' in this.$route.params) {
+        this.loadTimesheets().then(() => {
+          let selectedTimesheet = this.getTimesheetById(this.$route.params.timesheetId)
+          if (selectedTimesheet) {
+            this.editing = true
+            this.selectedTimesheet = Object.assign({}, selectedTimesheet)
+            this.selectedTimesheet.id = this.$route.params.timesheetId
+          }
+        })
       }
     },
 
     methods: {
       ...mapActions([
-        'updateTimesheet'
+        'updateTimesheet',
+        'loadTimesheets'
       ]),
 
       saveTimesheet () {
-        this.updateTimesheet(this.selectedTimeshset).then(() => {
+        console.log('THE TIMESHEET ID: ' + this.selectedTimesheet.id)
+        this.updateTimesheet(this.selectedTimesheet).then(() => {
           console.log('Timesheet updated.')
         })
       },
@@ -113,4 +154,11 @@
     }
   }
 </script>
+<style>
+  .non-wrappers {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+  }
+</style>
 

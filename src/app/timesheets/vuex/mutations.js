@@ -1,12 +1,12 @@
 import Vue from 'vue'
 
 export default {
-  CREATE_TIMESHEET (state, placement) {
-    state.timesheets[placement.id] = placement
+  CREATE_TIMESHEET (state, timesheet) {
+    state.timesheets[timesheet.id] = timesheet
   },
 
-  UPDATE_TIMESHEET (state, payload) {
-    state.timesheets[payload.timesheet.id] = payload.timesheet
+  UPDATE_TIMESHEET (state, timesheet) {
+    state.timesheets[timesheet.id] = timesheet
   },
 
   LOAD_TIMESHEETS (state, payload) {
