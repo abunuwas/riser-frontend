@@ -18,8 +18,8 @@
                 :to="{ name: 'listTimesheets' }"
               >Timesheets</router-link>
             </li>
-            <p class="menu-label">Rock n' Roll</p>
           </ul>
+          <p class="menu-label">Rock n' Roll</p>
           <ul class="menu-list">
             <li>
               <a v-on:click="showMusic()"
@@ -30,7 +30,7 @@
       </nav>
     </div>
     <div class="column is-8">
-    <iframe src="http://www.youtube.com/embed/M6JpxDebokM?autoplay=1" hidden="false" id="player"
+    <iframe src="http://www.youtube.com/embed/M6JpxDebokM" hidden="false" id="player"
             width="560" height="315" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
@@ -43,6 +43,7 @@
       showMusic () {
         let musicFrame = document.getElementById('player')
         musicFrame.removeAttribute('hidden')
+        musicFrame.setAttribute('src', 'http://www.youtube.com/embed/M6JpxDebokM?autoplay=1')
       }
     }
   }
