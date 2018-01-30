@@ -9,15 +9,9 @@ export const saveTimesheet = (timesheet) => {
   console.log('TIMESHEET start: ' + timesheet.start)
   let idURL = timesheet.id.split('-')[1]
   let url = `http://82.223.35.243/2/2/${idURL}/riserts.fcgi`
-  let config = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  }
   return axios.post(
     url,
-    { data: { 'timesheet': timesheet } },
-    config
+    { 'timesheet': timesheet }
     )
     .then((res) => {
       console.log('RESPONSE FROM SERVER: ' + res)
