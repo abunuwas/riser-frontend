@@ -22,7 +22,7 @@
                   <p class="subtitle"
                      v-bind:style="{ 'background-color': getColor(timesheet.status) }">
                     {{ timesheet.status }}</p>
-                  <div class="content">{{ timesheet.ts_start }}-{{ timesheet.ts_end }}</div>
+                  <div class="content">from {{ timesheet.ts_start | moment }} to {{ timesheet.ts_end | moment }}</div>
                   <div class="content">{{ timesheet["working days"].length }} days worked</div>
                   </router-link>
                 </article>
@@ -86,5 +86,6 @@
   .a-column {
     flex: 50%;
     padding: 0 4px;
+    width: 85%;
   }
 </style>

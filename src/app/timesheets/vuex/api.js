@@ -1,6 +1,8 @@
 import axios from 'axios'
 import moment from 'moment'
 
+const SERVER_URL = process.env.SERVER_URL
+
 export const saveTimesheet = (timesheet) => {
   timesheet = Object.assign({}, timesheet)
   console.log('THE TIMESHEET ---' + timesheet)
@@ -8,7 +10,7 @@ export const saveTimesheet = (timesheet) => {
   timesheet.end = timesheet.end.toJSON()
   console.log('TIMESHEET start: ' + timesheet.start)
   let idURL = timesheet.id.split('-')[1]
-  let url = `http://82.223.35.243/2/2/${idURL}/riserts.fcgi`
+  let url = `http://${SERVER_URL}/2/2/${idURL}/riserts.fcgi`
   return axios.post(
     url,
     { 'timesheet': timesheet }
@@ -22,8 +24,7 @@ export const saveTimesheet = (timesheet) => {
 }
 
 export const fetchTimesheets = (user, token) => {
-  console.log('We are about to fetch timesheets from server...')
-  return axios.get('http://82.223.35.243/2/2/riserts.fcgi', { user, token })
+  return axios.get(`http://${SERVER_URL}/2/2/riserts.fcgi`, { user, token })
     .then((res) => {
       let timesheets = res.data.timesheet
       Object.keys(timesheets).forEach((index) => {
