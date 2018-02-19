@@ -43,7 +43,6 @@
               <th>Start</th>
               <th>End</th>
               <th>Break</th>
-              <th>Status</th>
               </thead>
               <tbody v-for="day in selectedTimesheet['working days']">
               <tr>
@@ -56,6 +55,7 @@
                          name="start"
                          v-model="day.start"
                          style="width:auto;"
+                         :disabled="isEditable(selectedTimesheet.status)"
                   >
                 </td>
                 <td>
@@ -64,6 +64,7 @@
                          name="end"
                          v-model="day.end"
                          style="width:auto;"
+                         :disabled="isEditable(selectedTimesheet.status)"
                   >
                 </td>
                 <td>
@@ -72,10 +73,8 @@
                          name="end"
                          v-model="day.break"
                          style="width:auto;"
+                         :disabled="isEditable(selectedTimesheet.status)"
                   >
-                </td>
-                <td>
-                  <div class="non-wrappers">{{ day.state }}</div>
                 </td>
               </tr>
               </tbody>
@@ -144,6 +143,10 @@
 
       processSave () {
         this.saveTimesheet()
+      },
+
+      isEditable (status) {
+        return !(['X', 'S'].includes(status[0]))
       }
     },
 
