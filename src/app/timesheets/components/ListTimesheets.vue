@@ -19,11 +19,11 @@
                     :to="{ name: 'updateTimesheet',
                        params: { timesheetId: key } }"
                   >
-                  <p class="subtitle"
+                  <p class="subtitle timesheet-url"
                      v-bind:style="{ 'background-color': getColor(timesheet.status) }">
                     {{ timesheet.status }}</p>
-                  <div class="content">from {{ timesheet.ts_start | moment }} to {{ timesheet.ts_end | moment }}</div>
-                  <div class="content">{{ timesheet["working days"].length }} days worked</div>
+                  <div class="content" style="color: black;">from {{ timesheet.ts_start | moment }} to {{ timesheet.ts_end | moment }}</div>
+                  <div class="content" style="color: black;">{{ timesheet["working days"].length }} days worked</div>
                   </router-link>
                 </article>
               </div>
@@ -60,8 +60,8 @@
       ]),
 
       getColor (status) {
-        if (status === 'approved') {
-          return 'green'
+        if (status[0] === 'X') {
+          return 'yellow'
         } else {
           return 'blue'
         }
@@ -87,5 +87,8 @@
     flex: 50%;
     padding: 0 4px;
     width: 85%;
+  }
+
+  .timesheet-url {
   }
 </style>
