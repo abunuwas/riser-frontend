@@ -21,7 +21,7 @@
                   >
                   <p class="subtitle timesheet-url"
                      v-bind:style="{ 'background-color': getColor(timesheet.status) }">
-                    {{ timesheet.status }}</p>
+                    {{ translateStatus(timesheet.status) }}</p>
                   <div class="content" style="color: black;">from {{ timesheet.ts_start | moment }} to {{ timesheet.ts_end | moment }}</div>
                   <div class="content" style="color: black;">{{ timesheet["working days"].length }} days worked</div>
                   </router-link>
@@ -65,6 +65,17 @@
         } else {
           return 'blue'
         }
+      },
+
+      translateStatus (status) {
+        let statusMap = {
+          'X': 'pending',
+          'S': 'submitted',
+          'A': 'submitted',
+          'B': 'approved'
+        }
+        let tsStatus = status[0]
+        return statusMap[tsStatus]
       }
     },
 
