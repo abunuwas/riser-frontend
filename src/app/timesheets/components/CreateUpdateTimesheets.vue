@@ -46,8 +46,21 @@
               </thead>
               <tbody v-for="day in selectedTimesheet['working days']">
               <tr>
-                <td>
-                  <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis">{{ day.date }}</div>
+                <td v-if="day.date === ''">
+                    <p class="control has-icon has-addons">
+                      <datepicker
+                        name="date"
+                        input-class="input"
+                        format="MMMM yyyy"
+                        v-model="day.date"
+                      ></datepicker>
+                      <span class="icon">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                      </span>
+                    </p>
+                </td>
+                <td v-else>
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis">{{ day.date | moment }}</div>
                 </td>
                 <td>
                   <input type="text"
@@ -90,6 +103,11 @@
               </p>
               </div>
           </form>
+          <div>
+            <p class="control">
+              <button class="button" @click="addRow">Add row</button>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -100,12 +118,17 @@
 <script>
   import { mapActions, mapGetters } from 'vuex'
   import Datepicker from 'vuejs-datepicker'
+  import { moment } from '../../../filters'
 
   export default {
     name: 'timesheets-create-edit-view',
 
     components: {
       Datepicker
+    },
+
+    filters: {
+      moment
     },
 
     data: () => {
@@ -147,6 +170,15 @@
 
       isEditable (status) {
         return !(['X', 'S'].includes(status[0]))
+      },
+
+      addRow () {
+        this.selectedTimesheet['working days'].push({
+          date: '',
+          start: '',
+          end: '',
+          'break': ''
+        })
       }
     },
 
