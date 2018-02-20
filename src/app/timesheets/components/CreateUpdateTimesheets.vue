@@ -116,8 +116,9 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
   import Datepicker from 'vuejs-datepicker'
+  import { mapActions, mapGetters } from 'vuex'
+
   import { moment } from '../../../filters'
 
   export default {
@@ -173,12 +174,14 @@
       },
 
       addRow () {
-        this.selectedTimesheet['working days'].push({
-          date: '',
-          start: '',
-          end: '',
+        let workingDays = this.selectedTimesheet['working days'].slice()
+        workingDays.push({
+          'date': '',
+          'start': '',
+          'end': '',
           'break': ''
         })
+        this.$set(this.selectedTimesheet, 'working days', workingDays)
       }
     },
 
