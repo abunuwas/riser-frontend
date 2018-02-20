@@ -5,8 +5,8 @@ export default {
     state.timesheets[timesheet.id] = timesheet
   },
 
-  UPDATE_TIMESHEET (state, timesheet) {
-    state.timesheets[timesheet.id] = timesheet
+  UPDATE_TIMESHEET (state, data) {
+    state.timesheets[data.tsId] = data.timesheet
   },
 
   LOAD_TIMESHEETS (state, payload) {

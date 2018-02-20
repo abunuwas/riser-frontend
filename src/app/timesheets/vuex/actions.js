@@ -14,11 +14,7 @@ export const createTimesheet = ({ commit, state }, data) => {
 }
 
 export const updateTimesheet = ({ commit, state }, data) => {
-  console.log('Commit: ' + commit)
-  console.log('State: ' + state.id)
-  console.log('Timesheet updated ' + data.id)
   commit('UPDATE_TIMESHEET', data)
-  console.log('AFTER VUE UPDATE')
   saveTimesheet(data).then((value) => {
     console.log('timesheet saved ' + value)
   }).catch((err) => {
