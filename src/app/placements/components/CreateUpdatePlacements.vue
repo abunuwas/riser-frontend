@@ -201,7 +201,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style>
   #placements-create-edit-view {
 
   }

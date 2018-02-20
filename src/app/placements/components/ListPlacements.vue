@@ -111,7 +111,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style>
   #accounts-list-view {
   }
 </style>
