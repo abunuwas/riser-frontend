@@ -1,10 +1,10 @@
-# riser-frontend
+# Riser-frontend
 
 > Frontend for riser application.
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
